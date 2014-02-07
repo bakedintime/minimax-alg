@@ -52,7 +52,7 @@ http.createServer( function(req, res) {
     if(req.url == "/saveMinimax") {
 
         var postData = '';
-        var filename = 'jsonTree.json'
+        var filename = 'minimaxResults.json'
         req.on('data', function(datum) {
           postData += datum;
         });
@@ -60,7 +60,7 @@ http.createServer( function(req, res) {
         req.on('end', function() {
             fs.writeFile(filename, postData, function (err) {
               if (err) return console.log(err);
-              console.log('File jsonTree.json has been written to the folder.');
+              console.log('File '+filename+' has been written to the folder.');
             });
         });
 
