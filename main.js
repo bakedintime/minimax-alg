@@ -115,7 +115,7 @@ function GraphVisualizer(){
     };
 }
 
-//Leer archivo y cargar configuracion
+// TODO: Leer archivo y cargar configuracion
 var node1 = new Node('node1', 'unset');
 var node2 = new Node('node2', 'unset');
 var node3 = new Node('node3', 'unset');
