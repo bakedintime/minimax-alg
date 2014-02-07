@@ -146,7 +146,7 @@ function GraphVisualizer(bestPath){
 
 var root;
 //Loads tree configuration from setup file
-$.getJSON( "setup.json", function( data ) {
+$.getJSON( "config/setup.json", function( data ) {
     $.each(data["nodes"], function(key,val){
         eval('window[\''+val["name"]+'\'] = new Node(\''+val["name"]+'\', \''+val["value"]+'\')');
     });

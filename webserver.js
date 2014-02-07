@@ -52,7 +52,7 @@ http.createServer( function(req, res) {
     if(req.url == "/saveMinimax") {
 
         var postData = '';
-        var filename = 'minimaxResults.json'
+        var filename = 'config/minimaxResults.json'
         req.on('data', function(datum) {
           postData += datum;
         });
