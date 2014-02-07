@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/bakedintime/minimax-alg/issues"
   },
-  "homepage": "https://github.com/bakedintime/minimax-alg"
+  "homepage": "https://github.com/bakedintime/minimax-alg",
+  "dependencies": {
+    "request": "~2.33.0",
+    "express": "~3.4.8"
+  }
 }
