@@ -20,7 +20,7 @@ function Minimax(){
                 // pero no es el ultimo hijo; asignar su valor al padre y continuar.
                 node.setValue(childValue);
             }else if (node.getValue() !== 'unset' && i === (children.length-1)){
-                //Si el nodo padre tiene un valor asignado 
+                //Si el nodo padre tiene un valor asignado
                 // y es el ultimo hijo; asignar el mejor valor al padre y devolverlo.
                 if (this.isMin(level)){
                     node.setValue(Math.min(node.getValue(), childValue));
@@ -144,32 +144,24 @@ function GraphVisualizer(bestPath){
     };
 }
 
-// TODO: Leer archivo y cargar configuracion
-var node1 = new Node('node1', 'unset');
-var node2 = new Node('node2', 'unset');
-var node3 = new Node('node3', 'unset');
-var node4 = new Node('node4', 4);
-var node5 = new Node('node5', 5);
-var node6 = new Node('node6', 6);
-var node7 = new Node('node7', 7);
-var node8 = new Node('node8', 'unset');
-var node9 = new Node('node9', 'unset');
-var node10 = new Node('node10', 10);
-var node11 = new Node('node11', 11);
-var node12 = new Node('node12', 12);
+var root;
+//Loads tree configuration from setup file
+$.getJSON( "setup.json", function( data ) {
+    $.each(data["nodes"], function(key,val){
+        eval('window[\''+val["name"]+'\'] = new Node(\''+val["name"]+'\', \''+val["value"]+'\')');
+    });
+    $.each(data["relations"], function(key,val){
+        eval(val["parent"]+'.addChildren('+val["children"]+')');
+    });
+    root = eval(data.root);
 
-node1.addChildren(node2, node7, node8);
-node2.addChildren(node3, node6);
-node3.addChildren(node4, node5);
-node8.addChildren(node9, node12);
-node9.addChildren(node10, node11);
+    var minimax = new Minimax();
+    minimax.dfs(root);
+    minimax.bestPath = minimax.generateBestPath(root, root.getValue());
 
-var root = node1;
+    var graphVisualizer = new GraphVisualizer(minimax.bestPath);
+    var jsonTree = graphVisualizer.buildGraph(root);
+    graphVisualizer.generateGraph(jsonTree);
+});
 
-var minimax = new Minimax();
-minimax.dfs(root);
-minimax.bestPath = minimax.generateBestPath(root, root.getValue());
 
-var graphVisualizer = new GraphVisualizer(minimax.bestPath);
-var jsonTree = graphVisualizer.buildGraph(root);
-graphVisualizer.generateGraph(jsonTree);
