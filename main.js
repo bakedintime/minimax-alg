@@ -1,5 +1,7 @@
 /** main.js **/
 function Minimax(){
+    this.bestPath = [];
+
     this.dfs = function (node, level) {
         level = typeof level !== 'undefined' ? level : 1;
         if (!node.hasChildren()) {
@@ -42,8 +44,22 @@ function Minimax(){
         return level % 2 === 0;
     };
 
-    this.getBestPath = function(treeNodes){
-
+    this.generateBestPath = function(node, rootValue){
+        var bestPath = [];
+        if (!node.hasChildren()) {
+            bestPath.push(node.getName());
+            return bestPath;
+        }
+        bestPath.push(node.getName());
+        var i, children = node.getChildren(), child;
+        for (i = 0; i < children.length; i += 1) {
+            child = children[i];
+            if (child.getValue() === rootValue){
+                childBestPath = this.generateBestPath(child, rootValue);
+                bestPath = bestPath.concat(childBestPath);
+            }
+        }
+        return bestPath;
     };
 }
 
@@ -79,13 +95,16 @@ function  Node(givenName, givenValue) {
     };
 }
 
-function GraphVisualizer(){
+function GraphVisualizer(bestPath){
     this.graph = {};
+    this.bestPath = bestPath;
     this.buildGraph = function(node){
+        var isBestPath = ($.inArray(node.getName(), this.bestPath) > -1);
         var nodeDescription = {
             "name":node.getName() + " ("+ node.getValue() +")",
             "children":[],
-            "size":1
+            "size":1,
+            "isBestPath": isBestPath
         };
         if (!node.hasChildren()) {
             nodeDescription["name"] = node.getName() + " ("+ node.getValue() +")";
@@ -138,7 +157,9 @@ node9.addChildren(node10, node11);
 var root = node1;
 
 var minimax = new Minimax();
-var graphVisualizer = new GraphVisualizer();
-var result = minimax.dfs(root);
+minimax.dfs(root);
+minimax.bestPath = minimax.generateBestPath(root, root.getValue());
+
+var graphVisualizer = new GraphVisualizer(minimax.bestPath);
 var jsonTree = graphVisualizer.buildGraph(root);
 graphVisualizer.generateGraph(jsonTree);
