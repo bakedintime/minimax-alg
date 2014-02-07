@@ -121,13 +121,23 @@ function GraphVisualizer(bestPath){
     };
     this.generateGraph = function(jsonObject){
         this.graph = jsonObject;
+        var visualizer = this;
         //Escribir al directorio
         var jsonContents = JSON.stringify(this.graph);
-        var blob = new Blob([jsonContents], {type: "text/plain;charset=utf-8"});
-        var filename = 'jsonTree.json';
-        saveAs(blob, filename);
-
-        this.showGraph('jsonTree.json');
+        //Llamada al webserver para guardar el archivo
+        $.ajax({
+            dataType:'json',
+            url:'/saveMinimax',
+            type:'POST',
+            data:jsonContents,
+            success:function(response){
+                console.log(response.success);
+                visualizer.showGraph(response.success);
+            },
+            error:function(){
+                alert('No ha sido posible guardar el contenido del algoritmo Minimax.');
+            }
+        });
     };
     this.showGraph = function (filename){
         treeLoader = new FileLoader(filename);
