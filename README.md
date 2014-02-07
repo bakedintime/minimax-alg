@@ -1,5 +1,4 @@
-minimax-alg
-===========
+###minimax-alg
 
 # Setup
 
@@ -10,6 +9,7 @@ It runs with Node JS.
 To run issue this commands:
 
 > $ npm install
+
 > $ node webserver.js
 
 
