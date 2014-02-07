@@ -49,7 +49,7 @@ http.createServer( function(req, res) {
         console.log("Invalid file extension detected: " + ext);
     }
 
-    if(req.url == "/saveMinimax") {
+    if(req.url == "/saveResults") {
 
         var postData = '';
         var filename = 'config/minimaxResults.json'

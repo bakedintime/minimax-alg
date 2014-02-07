@@ -127,7 +127,7 @@ function GraphVisualizer(bestPath){
         //Llamada al webserver para guardar el archivo
         $.ajax({
             dataType:'json',
-            url:'/saveMinimax',
+            url:'/saveResults',
             type:'POST',
             data:jsonContents,
             success:function(response){
