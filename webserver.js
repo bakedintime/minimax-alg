@@ -4,6 +4,8 @@ var serverUrl = "127.0.0.1";
 var http = require("http");
 var path = require("path");
 var fs = require("fs");
+
+var request = require("request");
  
 console.log("Starting web server at " + serverUrl + ":" + port);
  
@@ -44,7 +46,14 @@ http.createServer( function(req, res) {
     } else {
         console.log("Invalid file extension detected: " + ext);
     }
- 
+
+    if(req.url == "/saveMinimax") {
+
+        console.log('testing');
+
+    }
+
+
 }).listen(port, serverUrl);
  
 function getFile(localPath, res, mimeType) {
