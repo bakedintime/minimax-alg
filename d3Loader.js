@@ -23,10 +23,14 @@ function FileLoader(filename){
         var tree = d3.layout.tree()
             .size([viewerHeight, viewerWidth]);
 
+        tree.separation(function separation(a, b) {
+            return a.parent == b.parent ? 5 : 5.5;
+        });
+
         // define a d3 diagonal projection for use by the node paths later on.
         var diagonal = d3.svg.diagonal()
             .projection(function(d) {
-                return [d.y, d.x];
+                return [d.x, d.y];
             });
 
         // A recursive helper function for performing some setup by walking through all nodes
@@ -195,10 +199,10 @@ function FileLoader(filename){
                     }
                 }
 
-                d.x0 += d3.event.dy;
-                d.y0 += d3.event.dx;
+                d.x0 += d3.event.dx;
+                d.y0 += d3.event.dy;
                 var node = d3.select(this);
-                node.attr("transform", "translate(" + d.y0 + "," + d.x0 + ")");
+                node.attr("transform", "translate(" + d.x0 + "," + d.y0 + ")");
                 updateTempConnector();
             }).on("dragend", function(d) {
                 if (d == root) {
@@ -278,12 +282,12 @@ function FileLoader(filename){
                 // have to flip the source coordinates since we did this for the existing connectors on the original tree
                 data = [{
                     source: {
-                        x: selectedNode.y0,
-                        y: selectedNode.x0
+                        x: selectedNode.x0,
+                        y: selectedNode.y0
                     },
                     target: {
-                        x: draggingNode.y0,
-                        y: draggingNode.x0
+                        x: draggingNode.x0,
+                        y: draggingNode.y0
                     }
                 }];
             }
@@ -303,8 +307,8 @@ function FileLoader(filename){
 
         function centerNode(source) {
             scale = zoomListener.scale();
-            x = -source.y0;
-            y = -source.x0;
+            x = -source.x0;
+            y = -source.y0;
             x = x * scale + viewerWidth / 2;
             y = y * scale + viewerHeight / 2;
             d3.select('g').transition()
@@ -353,7 +357,7 @@ function FileLoader(filename){
                 }
             };
             childCount(0, root);
-            var newHeight = d3.max(levelWidth) * 25; // 25 pixels per line  
+            var newHeight = d3.max(levelWidth) * 105; // Make nodes far apart  
             tree = tree.size([newHeight, viewerWidth]);
 
             // Compute the new tree layout.
@@ -379,7 +383,7 @@ function FileLoader(filename){
                 .call(dragListener)
                 .attr("class", "node")
                 .attr("transform", function(d) {
-                    return "translate(" + source.y0 + "," + source.x0 + ")";
+                    return "translate(" + source.x0 + "," + source.y0 + ")";
                 })
                 .on('click', click);
 
@@ -391,14 +395,12 @@ function FileLoader(filename){
                 });
 
             nodeEnter.append("text")
-                .attr("x", function(d) {
-                    return d.children || d._children ? -10 : 10;
+                .attr("y", function(d) {
+                    return d.children || d._children ? -18 : 18;
                 })
                 .attr("dy", ".35em")
                 .attr('class', 'nodeText')
-                .attr("text-anchor", function(d) {
-                    return d.children || d._children ? "end" : "start";
-                })
+                .attr("text-anchor", "middle")
                 .text(function(d) {
                     return d.name;
                 })
@@ -420,12 +422,10 @@ function FileLoader(filename){
 
             // Update the text to reflect whether node has children or not.
             node.select('text')
-                .attr("x", function(d) {
-                    return d.children || d._children ? -10 : 10;
+                .attr("y", function(d) {
+                    return d.children || d._children ? -18 : 18;
                 })
-                .attr("text-anchor", function(d) {
-                    return d.children || d._children ? "end" : "start";
-                })
+                .attr("text-anchor", "middle")
                 .text(function(d) {
                     return d.name;
                 });
@@ -441,7 +441,7 @@ function FileLoader(filename){
             var nodeUpdate = node.transition()
                 .duration(duration)
                 .attr("transform", function(d) {
-                    return "translate(" + d.y + "," + d.x + ")";
+                    return "translate(" + d.x + "," + d.y + ")";
                 });
 
             // Fade the text in
@@ -452,7 +452,7 @@ function FileLoader(filename){
             var nodeExit = node.exit().transition()
                 .duration(duration)
                 .attr("transform", function(d) {
-                    return "translate(" + source.y + "," + source.x + ")";
+                    return "translate(" + source.x + "," + source.y + ")";
                 })
                 .remove();
 
@@ -514,7 +514,7 @@ function FileLoader(filename){
 
         // Define the root
         root = treeData;
-        root.x0 = viewerHeight / 2;
+        root.x0 = viewerWidth / 2;
         root.y0 = 0;
 
         // Layout the tree initially and center on the root node.
