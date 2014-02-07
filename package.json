@@ -18,6 +18,5 @@
   "homepage": "https://github.com/bakedintime/minimax-alg",
   "dependencies": {
     "request": "~2.30.0",
-    "express": "~3.4.x"
   }
 }
