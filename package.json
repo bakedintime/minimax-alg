@@ -3,9 +3,6 @@
   "version": "0.1.0",
   "description": "Minimax algorithm and D3 visualization",
   "main": "webserver.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/bakedintime/minimax-alg.git"
@@ -17,7 +14,7 @@
   },
   "homepage": "https://github.com/bakedintime/minimax-alg",
   "dependencies": {
-    "request": "~2.30.0",
+    "request": "~2.30.0"
   },
   "engines": {
     "node": "0.10.x"
