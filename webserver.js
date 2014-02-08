@@ -1,5 +1,4 @@
 var port = 3000;
-var serverUrl = "127.0.0.1";
 
 var http = require("http");
 var path = require("path");
@@ -70,7 +69,7 @@ http.createServer( function(req, res) {
     }
 
 
-}).listen(process.env.PORT || port, serverUrl);
+}).listen(process.env.PORT || port);
 
 function getFile(localPath, res, mimeType) {
     fs.readFile(localPath, function(err, contents) {
