@@ -166,4 +166,29 @@ $.getJSON( "config/setup.json", function( data ) {
     graphVisualizer.generateGraph(jsonTree);
 });
 
+$('#update-button').click(function(){
+    var root;
+
+    $('#tree-container').html('');
+
+    var modifiedData = $.parseJSON($('textarea').val());
+    console.log(modifiedData);
+
+    $.each(modifiedData["nodes"], function(key,val){
+        eval('window[\''+val["name"]+'\'] = new Node(\''+val["name"]+'\', \''+val["value"]+'\')');
+    });
+    $.each(modifiedData["relations"], function(key,val){
+        eval(val["parent"]+'.addChildren('+val["children"]+')');
+    });
+    root = eval(modifiedData.root);
+
+    var minimax = new Minimax();
+    minimax.dfs(root);
+    minimax.bestPath = minimax.generateBestPath(root, root.getValue());
+
+    var graphVisualizer = new GraphVisualizer(minimax.bestPath);
+    var jsonTree = graphVisualizer.buildGraph(root);
+    graphVisualizer.generateGraph(jsonTree);
+});
+
 
