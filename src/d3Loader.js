@@ -23,10 +23,6 @@ function FileLoader(filename){
         var tree = d3.layout.tree()
             .size([viewerHeight, viewerWidth]);
 
-        tree.separation(function separation(a, b) {
-            return a.parent == b.parent ? 5 : 5.5;
-        });
-
         // define a d3 diagonal projection for use by the node paths later on.
         var diagonal = d3.svg.diagonal()
             .projection(function(d) {
