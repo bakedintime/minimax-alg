@@ -307,6 +307,7 @@ function FileLoader(filename){
             y = -source.y0;
             x = x * scale + viewerWidth / 2;
             y = y * scale + viewerHeight / 2;
+            y = y-250;
             d3.select('g').transition()
                 .duration(duration)
                 .attr("transform", "translate(" + x + "," + y + ")scale(" + scale + ")");
