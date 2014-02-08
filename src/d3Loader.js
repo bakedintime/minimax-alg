@@ -520,5 +520,9 @@ function FileLoader(filename){
         // Layout the tree initially and center on the root node.
         update(root);
         centerNode(root);
+
+        // Fix height from visualization to be able to scroll
+        // without getting blocked by the span
+        $('#tree-container svg').attr('height', '500');
     });
 }
