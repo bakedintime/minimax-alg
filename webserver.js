@@ -61,8 +61,9 @@ http.createServer( function(req, res) {
             });
         });
 
-        res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.write(JSON.stringify({'success': filename}));
+        var response = JSON.stringify({'success': filename});
+        res.writeHead(200, { 'Content-Type': 'application/json' , 'Content-Length':response.length});
+        res.write(response);
         res.end();
     }
 
