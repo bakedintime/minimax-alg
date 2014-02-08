@@ -1,6 +1,8 @@
-function FileLoader(filename){
+function FileLoader(jsonContents){
     // Get JSON data
     treeJSON = d3.json('config/setup.json', function(error, treeData) {
+
+        treeData = JSON.parse( jsonContents );
 
         // Calculate total nodes, max label length
         var totalNodes = 0;

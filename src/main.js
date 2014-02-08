@@ -124,23 +124,7 @@ function GraphVisualizer(bestPath){
         var visualizer = this;
         //Escribir al directorio
         var jsonContents = JSON.stringify(this.graph);
-        //Llamada al webserver para guardar el archivo
-        $.ajax({
-            dataType:'json',
-            url:'/saveResults',
-            type:'POST',
-            data:jsonContents,
-            success:function(response){
-                console.log(response.success);
-                visualizer.showGraph(response.success);
-            },
-            error:function(){
-                alert('No ha sido posible guardar el contenido del algoritmo Minimax.');
-            }
-        });
-    };
-    this.showGraph = function (filename){
-        treeLoader = new FileLoader(filename);
+        treeLoader = new FileLoader(jsonContents);
     };
 }
 

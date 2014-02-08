@@ -47,30 +47,6 @@ http.createServer( function(req, res) {
         console.log("Invalid file extension detected: " + ext);
     }
 
-    if(req.url == "/saveResults" || req.url == "/app/saveResults") {
-
-        var postData = '';
-        var resultsFile = 'tmp/minimaxResults.json';
-        req.on('data', function(datum) {
-          postData += datum;
-        });
-
-        req.on('end', function() {
-            fs.writeFile(resultsFile, postData, function (err) {
-              if (err){
-                return console.log(err);
-              }
-              console.log('File '+resultsFile+' has been written to the folder.');
-            });
-        });
-
-        var response = JSON.stringify({'success': resultsFile});
-        res.writeHead(200, { 'Content-Type': 'application/json' , 'Content-Length':response.length});
-        res.write(response);
-        res.end();
-    }
-
-
 }).listen(process.env.PORT || port);
 
 function getFile(localPath, res, mimeType) {
