@@ -50,19 +50,21 @@ http.createServer( function(req, res) {
     if(req.url == "/saveResults" || req.url == "/app/saveResults") {
 
         var postData = '';
-        var filename = 'config/minimaxResults.json'
+        var resultsFile = 'tmp/minimaxResults.json';
         req.on('data', function(datum) {
           postData += datum;
         });
 
         req.on('end', function() {
-            fs.writeFile(filename, postData, function (err) {
-              if (err) return console.log(err);
-              console.log('File '+filename+' has been written to the folder.');
+            fs.writeFile(resultsFile, postData, function (err) {
+              if (err){
+                return console.log(err);
+              }
+              console.log('File '+resultsFile+' has been written to the folder.');
             });
         });
 
-        var response = JSON.stringify({'success': filename});
+        var response = JSON.stringify({'success': resultsFile});
         res.writeHead(200, { 'Content-Type': 'application/json' , 'Content-Length':response.length});
         res.write(response);
         res.end();
