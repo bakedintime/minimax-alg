@@ -37,3 +37,6 @@ To set a tree just modify the file setup.json, it has the following structure:
 
 The web server will start listening on localhost port 8000, with the url: localhost:8000/index.html
 
+# Deployment
+
+The project is deployed on Heroku: http://minimax-alg.herokuapp.com/index.html
