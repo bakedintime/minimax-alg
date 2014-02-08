@@ -1,5 +1,10 @@
 ###minimax-alg
 
+# Requisites
+
++ Node js running
++ npm - Node package manager
+
 # Setup
 
 Minimax algorithm implementation with D3 visualization of results
