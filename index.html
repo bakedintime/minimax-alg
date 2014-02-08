@@ -1,52 +1,108 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
-    <head>
-        <style type="text/css">
-          .node {
-            cursor: pointer;
-          }
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap 101 Template</title>
 
-          .overlay{
-            background-color:#EEE;
-          }
+    <!-- Bootstrap -->
+    <link href="vendor/css/bootstrap.min.css" rel="stylesheet">
+    <link href="vendor/css/docs.min.css" rel="stylesheet">
 
-          .node circle {
-            fill: #fff;
-            stroke: steelblue;
-            stroke-width: 1.5px;
-          }
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style type="text/css">
+      body{
+        background-color:#5cb85c;
+        color:#fff;
+        font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+      }
 
-          .node text {
-            font-size:10px;
-            font-family:sans-serif;
-          }
+      textarea{
+        color:#000;
+      }
 
-          .link {
-            fill: none;
-            stroke: #ccc;
-            stroke-width: 1.5px;
-          }
+      .node {
+        cursor: pointer;
+      }
 
-          .templink {
-            fill: none;
-            stroke: red;
-            stroke-width: 3px;
-          }
+      .overlay{
+        background-color:#EEE;
+      }
 
-          .ghostCircle.show{
-              display:block;
-          }
+      .node circle {
+        fill: #fff;
+        stroke: steelblue;
+        stroke-width: 1.5px;
+      }
 
-          .ghostCircle, .activeDrag .ghostCircle{
-               display: none;
-          }
-        </style>
-    </head>
-    <body>
+      .node text {
+        font-size:10px;
+        font-family:sans-serif;
+      }
+
+      .link {
+        fill: none;
+        stroke: #ccc;
+        stroke-width: 1.5px;
+      }
+
+      .templink {
+        fill: none;
+        stroke: red;
+        stroke-width: 3px;
+      }
+
+      .ghostCircle.show{
+          display:block;
+      }
+
+      .ghostCircle, .activeDrag .ghostCircle{
+           display: none;
+      }
+
+      .tree-editor{
+        width:98%;
+        margin-right:10px;
+        margin-left:10px;
+      }
+
+      .bs-callout{
+        color:#000;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid">
+        <h1>Minimax Algorithm Visualization</h1>
+        <p>author: <a href="https://twitter.com/bakedInTime">@bakedintime</a></p>
+        <p>AI course</p>
+
+        <div class="bs-callout bs-callout-warning">
+          <h4>More about the project</h4>
+          <p> Respository @ github: <a href="http://github.com/bakedintime/minimax-alg">Github Repo</a></p>
+          <p> Live demo: <a href="http://minimax-alg.herokuapp.com/index.html">Demo</a></p>
+        </div>
+
+        <em>Edit the tree information and select update to see the results.</em>
+
+      <div class="row">
+        <textarea rows="12" class="tree-editor"></textarea>
+        <button id="update-button" type="button" class="btn btn-primary btn-lg btn-block">Update</button>
         <div id="tree-container"></div>
-        <script src="vendor/jquery-1.11.0.min.js"></script>
-        <script src="vendor/d3.v3.min.js"></script>
-        <script src="src/d3Loader.js"></script>
-        <script src="src/main.js"></script>
-    </body>
+      </div>
+    </div>
+
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="vendor/jquery-1.11.0.min.js"></script>
+    <script src="vendor/bootstrap.min.js"></script>
+    <script src="vendor/d3.v3.min.js"></script>
+    <script src="src/d3Loader.js"></script>
+    <script src="src/main.js"></script>
+  </body>
 </html>
