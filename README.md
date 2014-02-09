@@ -42,7 +42,7 @@ or modified directly on the index.html the string that's on the textarea and upd
 
 # Using
 
-The web server will start listening on localhost port 8000, with the url: localhost:8000/index.html
+The web server will start listening on localhost port 3000, with the url: localhost:3000/index.html
 
 # Deployment
 
